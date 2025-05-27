@@ -7,9 +7,19 @@ A Streamlit-based application for testing and experimenting with OpenAI's GPT mo
 - **Model Selection**: Choose between GPT-3.5-turbo, GPT-4, and GPT-4.1
 - **Configurable Prompts**: Customize both system and user prompts
 - **Parameter Testing**: Adjust temperature, max tokens, presence penalty, and frequency penalty
-- **Real-time Generation**: Generate product descriptions with live parameter adjustments
-- **Quick Test Presets**: Try predefined configurations to see parameter effects
-- **Clean Interface**: Intuitive sidebar configuration with main content display
+
+
+
+# Reflection on hyperparameters
+
+## Stop Sequences
+    - It is a special character or word. If that word is found in the LLM's output, the generation stops. This is what powers the tool calls. It causes the LLM to stop producing tokens after it has completed the tool call request and wait for the message from the tool call.   
+## Frequency Penalty
+    -It is a penalty imposed on the model when they use a particular word in a conversation repeatedly. It is a scaling penalty that increases as the word appears more frequently. While experimenting with this I realised the value between [0.2 ,0.8] is best for all the task where user wants to get output that doesn't contain repetitive words or "SOUND LIKE AI"
+## Presence Penalty
+    - It is imposed on the model when they use a particular word even once in a conversation. It is also called flat penalty due to its uniform nature - applying the same penalty regardless of frequency.This penalty looks at both the input prompt and generated output to discourage repetition from the entire conversation context  
+## Max Tokens 
+    - It is simple and stright forward as the name suggest this hyperparameter allow the number of tokens the LLM can produce in its response.
 
 ## Setup Instructions
 
@@ -87,16 +97,5 @@ interactive-prompt-playground/
 
 Never commit your `.env` file with real API keys to version control. The provided `.env` file contains placeholder values only.
 
-
-# Reflection on hyperparameters
-
-## Stop Sequences
-    - It is the special chracter or word, if that word is founnd in the output of the LLM the genration stops. This is the thing that powers tool calls, it causes the llm to stop producing token after it has completed the tool call reqest and wait for the message form the tool call.   
-## Frequency Penalty
-    -It is penalty imposed on the model when they use a particular word in a conversation repeatedly. It is scaling penalty that increases as the word appears more frequently. While experimenting with this I realised the value between [0.2 ,0.8] is best for all the task where user wants to get output that doesn't contain repetition word or "SOUND LIKE AI"
-## Presence Penalty
-    - It is imposed on the model when they use a particular word even once in a conversation. It is also called flat penalty due to its uniform nature - applying the same penalty regardless of frequency.This penalty looks at both the input prompt and generated output to discourage repetition from the entire conversation context  
-## Max Tokens 
-    - It is simple and stright forward as the name suggest this hyperparameter allow the number of tokens the LLM can produce in its response.
 ## Temperature
     - Temperature controls the randomness and creativity in LLM's - the lower the temperature the LLM will adhere to the user instructions and be more deterministic and hallucinate less. Higher temperature makes outputs more creative and diverse
